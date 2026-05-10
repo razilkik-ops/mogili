@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  user
+  admin
+}
+
+enum ServiceType {
+  ONLINE_VISIT
+  CLEANING
+  PHOTO_REPORT
+  VIDEO_REPORT
+  LIVE_CALL
+}
+
+enum ReportType {
+  PHOTO
+  VIDEO
+  LIVE_CALL
+}
+
+enum ContactMethod {
+  TELEGRAM
+  WHATSAPP
+  ZOOM
+  PHONE
+  EMAIL
+}
+
+enum OrderStatus {
+  NEW
+  ACCEPTED
+  SCHEDULED
+  IN_PROGRESS
+  REPORT_UPLOADED
+  COMPLETED
+  CANCELED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(user)
+  createdAt    DateTime @default(now())
+
+  graves Grave[]
+  orders Order[]
+}
+
+model Grave {
+  id          String    @id @default(cuid())
+  userId      String
+  fullName    String
+  birthDate   DateTime?
+  deathDate   DateTime?
+  city        String
+  cemetery    String
+  cemeteryAddress String?
+  section     String?
+  row         String?
+  place       String?
+  description String?
+  photoUrl    String?
+  latitude    Float?
+  longitude   Float?
+  createdAt   DateTime  @default(now())
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orders Order[]
+}
+
+model Order {
+  id             String        @id @default(cuid())
+  userId         String
+  graveId        String
+  serviceType    ServiceType
+  reportType     ReportType
+  contactMethod  ContactMethod
+  contactValue   String
+  preferredDate  DateTime
+  status         OrderStatus   @default(NEW)
+  userComment    String?
+  adminComment   String?
+  zoomLink       String?
+  telegramLink   String?
+  videoReportUrl String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  grave        Grave         @relation(fields: [graveId], references: [id], onDelete: Cascade)
+  reportPhotos ReportPhoto[]
+}
+
+model ReportPhoto {
+  id        String   @id @default(cuid())
+  orderId   String
+  imageUrl  String
+  createdAt DateTime @default(now())
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model ContactRequest {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  createdAt DateTime @default(now())
+}

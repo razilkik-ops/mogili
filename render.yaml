@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: memorial-visit
+    runtime: node
+    plan: starter
+    buildCommand: npm ci && npm run build
+    preDeployCommand: npm run prisma:deploy
+    startCommand: npm start
+    disk:
+      name: memorial-visit-uploads
+      mountPath: /var/data/uploads
+      sizeGB: 1
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: memorial-visit-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: NEXT_PUBLIC_APP_URL
+        sync: false
+      - key: UPLOAD_DIR
+        value: /var/data/uploads
+
+databases:
+  - name: memorial-visit-db
+    databaseName: memorial_visit
+    user: memorial_visit
