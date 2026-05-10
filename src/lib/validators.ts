@@ -13,6 +13,11 @@ export const loginSchema = z.object({
 });
 
 const optionalText = z.string().trim().optional().or(z.literal(""));
+const optionalLongText = z
+  .string()
+  .trim()
+  .max(1000, "Не больше 1000 символов")
+  .refine((value) => value === "" || value.length >= 3, "Опишите вопрос чуть подробнее");
 
 export const graveSchema = z.object({
   fullName: z.string().trim().min(3, "Укажите ФИО"),
@@ -45,4 +50,8 @@ export const contactSchema = z.object({
   email: z.email("Укажите корректный email"),
   phone: optionalText,
   message: z.string().trim().min(10, "Напишите сообщение подробнее"),
+});
+
+export const orderQuestionSchema = z.object({
+  customerQuestion: optionalLongText,
 });

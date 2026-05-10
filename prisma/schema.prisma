@@ -90,6 +90,7 @@ model Order {
   preferredDateTime DateTime
   status         OrderStatus   @default(NEW)
   userComment    String?
+  customerQuestion String?
   adminComment   String?
   communicationLink String?
   videoReportUrl String?

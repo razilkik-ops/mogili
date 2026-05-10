@@ -57,6 +57,10 @@ export default async function AdminOrderPage({ params }: PageProps) {
             <p className="text-sm font-semibold text-ink">Комментарий клиента</p>
             <p className="mt-2 muted">{order.userComment || "Нет комментария"}</p>
           </div>
+          <div className="mt-4 rounded-md bg-linen p-4">
+            <p className="text-sm font-semibold text-ink">Вопрос клиента</p>
+            <p className="mt-2 muted">{order.customerQuestion || "Пока не задан"}</p>
+          </div>
           <div className="mt-5">
             <p className="text-sm font-semibold text-ink">Адрес</p>
             <p className="mt-2 muted">

@@ -81,7 +81,7 @@ export function AdminOrderForm({ order }: AdminOrderFormProps) {
       </div>
       <div className="md:col-span-2">
         <label className="label" htmlFor="adminComment">
-          Комментарий администратора
+          Ответ / комментарий администратора
         </label>
         <textarea id="adminComment" name="adminComment" rows={4} className="input" defaultValue={order.adminComment || ""} />
       </div>
