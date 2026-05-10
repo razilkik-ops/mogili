@@ -3,7 +3,8 @@ import { statusLabels } from "@/lib/constants";
 
 const statusClass: Record<OrderStatus, string> = {
   NEW: "bg-stonewarm text-ink",
-  ACCEPTED: "bg-[#dbe3d7] text-moss",
+  AWAITING_COMMUNICATION_LINK: "bg-[#efe3d7] text-[#8a5c3a]",
+  COMMUNICATION_LINK_ADDED: "bg-[#dce9e1] text-moss",
   SCHEDULED: "bg-[#e7e0d6] text-graphite",
   IN_PROGRESS: "bg-[#d8ddcf] text-moss",
   REPORT_UPLOADED: "bg-[#e9eddc] text-ink",

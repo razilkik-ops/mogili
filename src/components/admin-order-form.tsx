@@ -4,16 +4,15 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ImageUpload } from "@/components/image-upload";
 import { statusOptions } from "@/lib/constants";
-import { toDateInput } from "@/lib/format";
+import { toDateTimeInput } from "@/lib/format";
 
 type AdminOrderFormProps = {
   order: {
     id: string;
     status: string;
-    preferredDate: Date | string;
+    preferredDateTime: Date | string;
     adminComment?: string | null;
-    zoomLink?: string | null;
-    telegramLink?: string | null;
+    communicationLink?: string | null;
     videoReportUrl?: string | null;
     reportPhotos: { imageUrl: string }[];
   };
@@ -69,10 +68,16 @@ export function AdminOrderForm({ order }: AdminOrderFormProps) {
         </select>
       </div>
       <div>
-        <label className="label" htmlFor="preferredDate">
-          Дата выполнения
+        <label className="label" htmlFor="preferredDateTime">
+          Желаемые дата и время
         </label>
-        <input id="preferredDate" name="preferredDate" type="date" className="input" defaultValue={toDateInput(order.preferredDate)} />
+        <input
+          id="preferredDateTime"
+          name="preferredDateTime"
+          type="datetime-local"
+          className="input"
+          defaultValue={toDateTimeInput(order.preferredDateTime)}
+        />
       </div>
       <div className="md:col-span-2">
         <label className="label" htmlFor="adminComment">
@@ -81,18 +86,18 @@ export function AdminOrderForm({ order }: AdminOrderFormProps) {
         <textarea id="adminComment" name="adminComment" rows={4} className="input" defaultValue={order.adminComment || ""} />
       </div>
       <div>
-        <label className="label" htmlFor="zoomLink">
-          Zoom-ссылка
+        <label className="label" htmlFor="communicationLink">
+          Ссылка для связи
         </label>
-        <input id="zoomLink" name="zoomLink" className="input" defaultValue={order.zoomLink || ""} />
+        <input
+          id="communicationLink"
+          name="communicationLink"
+          className="input"
+          placeholder="Zoom, Telegram, Google Meet, WhatsApp или другая ссылка"
+          defaultValue={order.communicationLink || ""}
+        />
       </div>
       <div>
-        <label className="label" htmlFor="telegramLink">
-          Telegram-ссылка
-        </label>
-        <input id="telegramLink" name="telegramLink" className="input" defaultValue={order.telegramLink || ""} />
-      </div>
-      <div className="md:col-span-2">
         <label className="label" htmlFor="videoReportUrl">
           Ссылка на видеоотчёт
         </label>

@@ -143,7 +143,7 @@ export function GraveForm({ initial }: GraveFormProps) {
         </p>
       </div>
       <div className="md:col-span-2">
-        <ImageUpload value={photoUrl} onChange={setPhotoUrl} label="Фото могилы" />
+        <ImageUpload value={photoUrl} onChange={setPhotoUrl} onRemove={() => setPhotoUrl("")} label="Фото могилы" />
       </div>
       {error ? <p className="text-sm text-[#8a453b] md:col-span-2">{error}</p> : null}
       {message ? <p className="text-sm text-moss md:col-span-2">{message}</p> : null}

@@ -4,7 +4,7 @@ import { AdminOrderForm } from "@/components/admin-order-form";
 import { StatusBadge } from "@/components/status-badge";
 import { requireAdmin } from "@/lib/auth";
 import { contactLabels, reportLabels, serviceLabels } from "@/lib/constants";
-import { formatDate } from "@/lib/format";
+import { formatDateTime } from "@/lib/format";
 import { prisma } from "@/lib/prisma";
 
 type PageProps = { params: Promise<{ id: string }> };
@@ -37,8 +37,8 @@ export default async function AdminOrderPage({ params }: PageProps) {
           <h2 className="text-lg font-semibold text-ink">Информация</h2>
           <dl className="mt-5 space-y-3 text-sm">
             <div className="flex justify-between gap-4">
-              <dt className="text-graphite">Дата</dt>
-              <dd className="font-medium text-ink">{formatDate(order.preferredDate)}</dd>
+              <dt className="text-graphite">Дата и время</dt>
+              <dd className="font-medium text-ink">{formatDateTime(order.preferredDateTime)}</dd>
             </div>
             <div className="flex justify-between gap-4">
               <dt className="text-graphite">Отчёт</dt>

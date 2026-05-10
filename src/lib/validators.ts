@@ -36,7 +36,7 @@ export const orderSchema = z.object({
   reportType: z.enum(ReportType),
   contactMethod: z.enum(ContactMethod),
   contactValue: z.string().trim().min(2, "Укажите контакт"),
-  preferredDate: z.string().min(1, "Выберите дату"),
+  preferredDateTime: z.string().min(1, "Выберите дату и время"),
   userComment: optionalText,
 });
 

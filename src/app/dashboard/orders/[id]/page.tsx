@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { StatusBadge } from "@/components/status-badge";
 import { requireUser } from "@/lib/auth";
 import { contactLabels, reportLabels, serviceLabels } from "@/lib/constants";
-import { formatDate } from "@/lib/format";
+import { formatDateTime } from "@/lib/format";
 import { prisma } from "@/lib/prisma";
 
 type PageProps = { params: Promise<{ id: string }> };
@@ -34,8 +34,8 @@ export default async function OrderPage({ params }: PageProps) {
           <h2 className="text-lg font-semibold text-ink">Детали</h2>
           <dl className="mt-5 space-y-3 text-sm">
             <div className="flex justify-between gap-4">
-              <dt className="text-graphite">Дата</dt>
-              <dd className="font-medium text-ink">{formatDate(order.preferredDate)}</dd>
+              <dt className="text-graphite">Дата и время</dt>
+              <dd className="font-medium text-ink">{formatDateTime(order.preferredDateTime)}</dd>
             </div>
             <div className="flex justify-between gap-4">
               <dt className="text-graphite">Отчёт</dt>
@@ -55,7 +55,7 @@ export default async function OrderPage({ params }: PageProps) {
             <p className="mt-2 muted">{order.userComment || "Нет комментария"}</p>
           </div>
           <div className="mt-4 rounded-md bg-linen p-4">
-            <p className="text-sm font-semibold text-ink">Комментарий исполнителя</p>
+            <p className="text-sm font-semibold text-ink">Комментарий администратора</p>
             <p className="mt-2 muted">{order.adminComment || "Пока не добавлен"}</p>
           </div>
         </div>
@@ -84,9 +84,28 @@ export default async function OrderPage({ params }: PageProps) {
           <div className="card p-6">
             <h2 className="text-lg font-semibold text-ink">Отчёты и ссылки</h2>
             <div className="mt-4 space-y-2 text-sm text-graphite">
-              <p>Видеоотчёт: {order.videoReportUrl ? <a className="font-semibold text-moss" href={order.videoReportUrl}>открыть</a> : "пока нет"}</p>
-              <p>Zoom: {order.zoomLink ? <a className="font-semibold text-moss" href={order.zoomLink}>перейти</a> : "пока нет"}</p>
-              <p>Telegram: {order.telegramLink ? <a className="font-semibold text-moss" href={order.telegramLink}>перейти</a> : "пока нет"}</p>
+              <p>
+                Видеоотчёт:{" "}
+                {order.videoReportUrl ? (
+                  <a className="font-semibold text-moss" href={order.videoReportUrl} target="_blank" rel="noreferrer">
+                    открыть
+                  </a>
+                ) : (
+                  "пока нет"
+                )}
+              </p>
+              <p>
+                Ссылка для связи:{" "}
+                {order.communicationLink ? (
+                  <a className="font-semibold text-moss" href={order.communicationLink} target="_blank" rel="noreferrer">
+                    перейти
+                  </a>
+                ) : order.status === "AWAITING_COMMUNICATION_LINK" ? (
+                  "администратор добавит её перед созвоном"
+                ) : (
+                  "пока нет"
+                )}
+              </p>
             </div>
             {order.reportPhotos.length ? (
               <div className="mt-5 grid gap-3 sm:grid-cols-2">

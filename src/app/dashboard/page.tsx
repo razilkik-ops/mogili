@@ -4,7 +4,7 @@ import { EmptyState } from "@/components/empty-state";
 import { StatusBadge } from "@/components/status-badge";
 import { requireUser } from "@/lib/auth";
 import { serviceLabels } from "@/lib/constants";
-import { formatDate } from "@/lib/format";
+import { formatDateTime } from "@/lib/format";
 import { prisma } from "@/lib/prisma";
 
 export default async function DashboardPage() {
@@ -111,7 +111,7 @@ export default async function DashboardPage() {
                   <div>
                     <p className="font-semibold text-ink">{serviceLabels[order.serviceType]}</p>
                     <p className="muted">
-                      {order.grave.fullName}, {formatDate(order.preferredDate)}
+                      {order.grave.fullName}, {formatDateTime(order.preferredDateTime)}
                     </p>
                   </div>
                   <StatusBadge status={order.status} />

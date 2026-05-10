@@ -9,19 +9,32 @@ export async function PATCH(request: Request, { params }: Params) {
   await requireAdmin();
   const { id } = await params;
   const body = await request.json();
+  const existing = await prisma.order.findUnique({ where: { id } });
+
+  if (!existing) {
+    return jsonError("Заказ не найден", 404);
+  }
 
   if (body.status && !Object.values(OrderStatus).includes(body.status)) {
     return jsonError("Некорректный статус", 400);
   }
 
+  const hasCommunicationLinkField = Object.prototype.hasOwnProperty.call(body, "communicationLink");
+  const communicationLink = hasCommunicationLinkField ? clean(body.communicationLink) : undefined;
+  const status =
+    communicationLink &&
+    (body.status === "AWAITING_COMMUNICATION_LINK" ||
+      (!body.status && existing.status === "AWAITING_COMMUNICATION_LINK"))
+      ? "COMMUNICATION_LINK_ADDED"
+      : body.status;
+
   const order = await prisma.order.update({
     where: { id },
     data: {
-      status: body.status,
-      preferredDate: body.preferredDate ? new Date(body.preferredDate) : undefined,
+      status,
+      preferredDateTime: body.preferredDateTime ? new Date(body.preferredDateTime) : undefined,
       adminComment: clean(body.adminComment),
-      zoomLink: clean(body.zoomLink),
-      telegramLink: clean(body.telegramLink),
+      communicationLink,
       videoReportUrl: clean(body.videoReportUrl),
       reportPhotos: Array.isArray(body.photoUrls)
         ? {

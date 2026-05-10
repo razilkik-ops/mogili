@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { contactOptions, reportOptions, serviceOptions } from "@/lib/constants";
-import { toDateInput } from "@/lib/format";
+import { toDateTimeInput } from "@/lib/format";
 
 type GraveOption = {
   id: string;
@@ -22,7 +22,7 @@ type OrderFormProps = {
     reportType: string;
     contactMethod: string;
     contactValue: string;
-    preferredDate: Date | string;
+    preferredDateTime: Date | string;
     userComment?: string | null;
   };
 };
@@ -97,15 +97,15 @@ export function OrderForm({ graves, defaultServiceType, initial }: OrderFormProp
         </select>
       </div>
       <div>
-        <label className="label" htmlFor="preferredDate">
-          Желаемая дата
+        <label className="label" htmlFor="preferredDateTime">
+          Желаемые дата и время
         </label>
         <input
-          id="preferredDate"
-          name="preferredDate"
-          type="date"
+          id="preferredDateTime"
+          name="preferredDateTime"
+          type="datetime-local"
           className="input"
-          defaultValue={toDateInput(initial?.preferredDate)}
+          defaultValue={toDateTimeInput(initial?.preferredDateTime)}
           required
         />
       </div>

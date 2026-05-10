@@ -1,19 +1,42 @@
 "use client";
 
-import { ImagePlus } from "lucide-react";
-import { useState } from "react";
+import { ImagePlus, Trash2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 type ImageUploadProps = {
   value?: string | null;
   onChange: (url: string) => void;
+  onRemove?: () => void;
   label?: string;
 };
 
-export function ImageUpload({ value, onChange, label = "Загрузить изображение" }: ImageUploadProps) {
+export function ImageUpload({ value, onChange, onRemove, label = "Загрузить изображение" }: ImageUploadProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [previewUrl, setPreviewUrl] = useState(value || "");
+  const objectUrlRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (!loading) {
+      setPreviewUrl(value || "");
+    }
+  }, [loading, value]);
+
+  useEffect(() => {
+    return () => {
+      if (objectUrlRef.current) {
+        URL.revokeObjectURL(objectUrlRef.current);
+      }
+    };
+  }, []);
 
   async function upload(file: File) {
+    if (objectUrlRef.current) {
+      URL.revokeObjectURL(objectUrlRef.current);
+    }
+
+    objectUrlRef.current = URL.createObjectURL(file);
+    setPreviewUrl(objectUrlRef.current);
     setLoading(true);
     setError("");
 
@@ -28,7 +51,24 @@ export function ImageUpload({ value, onChange, label = "Загрузить из�
       return;
     }
 
+    if (objectUrlRef.current) {
+      URL.revokeObjectURL(objectUrlRef.current);
+      objectUrlRef.current = null;
+    }
+
+    setPreviewUrl(payload.url);
     onChange(payload.url);
+  }
+
+  function removeImage() {
+    if (objectUrlRef.current) {
+      URL.revokeObjectURL(objectUrlRef.current);
+      objectUrlRef.current = null;
+    }
+
+    setPreviewUrl("");
+    setError("");
+    onRemove?.();
   }
 
   return (
@@ -47,8 +87,26 @@ export function ImageUpload({ value, onChange, label = "Загрузить из�
           }}
         />
       </label>
-      {value ? (
-        <img src={value} alt="" className="mt-3 h-40 w-full rounded-md border border-stonewarm object-cover" />
+      {previewUrl ? (
+        <div className="mt-3 overflow-hidden rounded-md border border-stonewarm bg-white/80">
+          <img src={previewUrl} alt="Предпросмотр фотографии" className="h-48 w-full object-cover" />
+          <div className="flex items-center justify-between gap-3 border-t border-stonewarm/80 px-4 py-3">
+            <div className="text-xs font-semibold text-graphite/75">
+              <span>{loading ? "Загружаем фотографию..." : "Фото готово к сохранению"}</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-semibold text-graphite/75">{loading ? "Предпросмотр" : "Загружено"}</span>
+              <button
+                type="button"
+                className="inline-flex items-center gap-2 rounded-md border border-stonewarm/80 px-3 py-2 text-xs font-semibold text-[#8a453b] transition hover:bg-[#f4e7e2]"
+                onClick={removeImage}
+              >
+                <Trash2 className="h-4 w-4" aria-hidden />
+                Удалить
+              </button>
+            </div>
+          </div>
+        </div>
       ) : null}
       {error ? <p className="mt-2 text-sm text-[#8a453b]">{error}</p> : null}
     </div>

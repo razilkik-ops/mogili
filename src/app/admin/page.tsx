@@ -3,7 +3,7 @@ import { ClipboardList, MapPinned, Users } from "lucide-react";
 import { StatusBadge } from "@/components/status-badge";
 import { requireAdmin } from "@/lib/auth";
 import { serviceLabels } from "@/lib/constants";
-import { formatDate } from "@/lib/format";
+import { formatDateTime } from "@/lib/format";
 import { prisma } from "@/lib/prisma";
 
 export default async function AdminPage() {
@@ -46,7 +46,7 @@ export default async function AdminPage() {
                 <div>
                   <p className="font-semibold text-ink">{serviceLabels[order.serviceType]}</p>
                   <p className="muted">
-                    {order.user.name} - {order.grave.fullName}, {formatDate(order.preferredDate)}
+                    {order.user.name} - {order.grave.fullName}, {formatDateTime(order.preferredDateTime)}
                   </p>
                 </div>
                 <StatusBadge status={order.status} />

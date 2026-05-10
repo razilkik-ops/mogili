@@ -36,7 +36,8 @@ enum ContactMethod {
 
 enum OrderStatus {
   NEW
-  ACCEPTED
+  AWAITING_COMMUNICATION_LINK
+  COMMUNICATION_LINK_ADDED
   SCHEDULED
   IN_PROGRESS
   REPORT_UPLOADED
@@ -86,12 +87,11 @@ model Order {
   reportType     ReportType
   contactMethod  ContactMethod
   contactValue   String
-  preferredDate  DateTime
+  preferredDateTime DateTime
   status         OrderStatus   @default(NEW)
   userComment    String?
   adminComment   String?
-  zoomLink       String?
-  telegramLink   String?
+  communicationLink String?
   videoReportUrl String?
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt

@@ -9,11 +9,11 @@ export const serviceLabels: Record<ServiceType, string> = {
 };
 
 export const serviceDescriptions: Record<ServiceType, string> = {
-  ONLINE_VISIT: "Исполнитель приезжает на место, проверяет состояние захоронения и бережно фиксирует результат.",
+  ONLINE_VISIT: "Администратор ведёт заказ, организует посещение места и загружает результат в личный кабинет.",
   CLEANING: "Аккуратная базовая уборка участка, удаление мусора, протирка памятника и уход за местом.",
-  PHOTO_REPORT: "Серия фотографий после посещения или уборки с комментариями исполнителя.",
+  PHOTO_REPORT: "Серия фотографий после посещения или уборки с комментарием администратора.",
   VIDEO_REPORT: "Короткое видео с места захоронения и спокойным обзором выполненных работ.",
-  LIVE_CALL: "Видеозвонок с места через Zoom, Telegram или другой согласованный канал.",
+  LIVE_CALL: "Видеосвязь через Zoom, Telegram, Google Meet, WhatsApp или другой согласованный канал.",
 };
 
 export const reportLabels: Record<ReportType, string> = {
@@ -32,7 +32,8 @@ export const contactLabels: Record<ContactMethod, string> = {
 
 export const statusLabels: Record<OrderStatus, string> = {
   NEW: "Новый",
-  ACCEPTED: "Принят в работу",
+  AWAITING_COMMUNICATION_LINK: "Ожидаем ссылки для связи",
+  COMMUNICATION_LINK_ADDED: "Ссылка для связи добавлена",
   SCHEDULED: "Запланирован",
   IN_PROGRESS: "Выполняется",
   REPORT_UPLOADED: "Отчёт загружен",

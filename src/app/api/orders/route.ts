@@ -30,7 +30,7 @@ export async function POST(request: Request) {
         reportType: data.reportType,
         contactMethod: data.contactMethod,
         contactValue: data.contactValue,
-        preferredDate: new Date(data.preferredDate),
+        preferredDateTime: new Date(data.preferredDateTime),
         userComment: clean(data.userComment),
       },
       include: { grave: true, reportPhotos: true },
