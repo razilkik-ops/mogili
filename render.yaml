@@ -3,8 +3,7 @@ services:
     name: memorial-visit
     runtime: node
     plan: starter
-    buildCommand: npm ci && npm run build
-    preDeployCommand: npm run prisma:deploy
+    buildCommand: npm ci && npm run build:render
     startCommand: npm start
     disk:
       name: memorial-visit-uploads

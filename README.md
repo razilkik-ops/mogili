@@ -107,7 +107,7 @@ SMS_PROVIDER_TOKEN=""
 NEXT_PUBLIC_APP_URL="https://your-service.onrender.com"
 ```
 
-Миграции выполняются командой `npm run prisma:deploy` в `preDeployCommand`.
+Миграции выполняются внутри `Build Command`, поэтому отдельный `Pre-Deploy Command` не нужен.
 
 ### Вариант вручную
 
@@ -116,8 +116,7 @@ NEXT_PUBLIC_APP_URL="https://your-service.onrender.com"
 3. Укажите:
 
 ```bash
-Build Command: npm ci && npm run build
-Pre-deploy Command: npm run prisma:deploy
+Build Command: npm ci && npm run build:render
 Start Command: npm start
 ```
 
@@ -138,6 +137,8 @@ Size: 1 GB или больше
 ```
 
 Важно: без Persistent Disk локальные загруженные фото будут теряться после redeploy/restart. Для масштабирования на несколько инстансов лучше заменить диск на S3/Cloudflare R2/Supabase Storage.
+
+Если вы используете Free Web Service, отдельный `Pre-Deploy Command` в Render недоступен. В таком случае используйте `Build Command: npm ci && npm run build:render`, где миграции Prisma выполняются перед сборкой.
 
 ### Seed в production
 
