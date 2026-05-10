@@ -50,7 +50,7 @@ export default function HomePage() {
           <div className="max-w-3xl">
             <div className="inline-flex max-w-full items-center gap-3 rounded-full border border-stonewarm/80 bg-white/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-moss shadow-sm backdrop-blur-xl">
               <span className="h-2 w-2 rounded-full bg-clay" />
-              Memorial Visit
+              Тихое посещение
             </div>
             <h1 className="display-title mt-7 max-w-4xl text-5xl sm:text-7xl lg:text-8xl">
             Тихое посещение
@@ -85,7 +85,7 @@ export default function HomePage() {
           <div className="relative mx-auto w-full max-w-2xl">
             <div className="panel relative overflow-hidden p-3 sm:p-4">
               <div className="absolute left-6 top-6 z-10 rounded-full bg-ink px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white">
-                live care
+                Бережный уход
               </div>
               <img src="/sample-report-1.svg" alt="" className="aspect-[4/3] w-full rounded-lg object-cover" />
               <div className="absolute bottom-5 left-5 right-5 rounded-lg border border-white/70 bg-white/90 p-4 shadow-lift backdrop-blur-xl sm:bottom-8 sm:left-8 sm:right-8 sm:p-5">

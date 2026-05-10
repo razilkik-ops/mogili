@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Leaf, ShieldCheck } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth";
+import { MobileMenu } from "@/components/mobile-menu";
 import { LogoutButton } from "@/components/logout-button";
 
 export async function Header() {
@@ -16,7 +17,7 @@ export async function Header() {
           <span className="min-w-0 leading-tight">
             <span className="block truncate text-sm sm:text-base">Тихое посещение</span>
             <span className="hidden text-[11px] font-bold uppercase tracking-[0.2em] text-moss sm:block">
-              Memorial Visit
+              Сервис памяти
             </span>
           </span>
         </Link>
@@ -53,17 +54,7 @@ export async function Header() {
           )}
         </nav>
 
-        <div className="flex items-center gap-3 md:hidden">
-          {user ? (
-            <Link href="/dashboard" className="btn-secondary px-3 text-sm">
-              Кабинет
-            </Link>
-          ) : (
-            <Link href="/login" className="btn-secondary px-3 text-sm">
-              Войти
-            </Link>
-          )}
-        </div>
+        <MobileMenu isAuthenticated={Boolean(user)} isAdmin={user?.role === "admin"} />
       </div>
     </header>
   );
