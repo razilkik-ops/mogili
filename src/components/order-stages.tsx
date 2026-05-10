@@ -1,10 +1,16 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import type { OrderStatus, ServiceType } from "@prisma/client";
 import { statusLabels } from "@/lib/constants";
 import { getOrderStages } from "@/lib/order-progress";
 
 type OrderStagesProps = {
+  orderId: string;
   serviceType: ServiceType;
   status: OrderStatus;
+  communicationLink?: string | null;
 };
 
 const stageClass = {
@@ -25,8 +31,30 @@ const stageClass = {
   },
 } as const;
 
-export function OrderStages({ serviceType, status }: OrderStagesProps) {
+export function OrderStages({ orderId, serviceType, status, communicationLink }: OrderStagesProps) {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const stages = getOrderStages(serviceType, status);
+
+  async function confirmSchedule() {
+    setLoading(true);
+    setError("");
+
+    const response = await fetch(`/api/orders/${orderId}/confirm-schedule`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+    });
+    const payload = await response.json();
+    setLoading(false);
+
+    if (!response.ok) {
+      setError(payload.error || "Не удалось подтвердить дату и время");
+      return;
+    }
+
+    router.refresh();
+  }
 
   return (
     <div className="card p-6">
@@ -52,12 +80,25 @@ export function OrderStages({ serviceType, status }: OrderStagesProps) {
                     {stage.state === "complete" ? <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${styles.badge}`}>Пройден</span> : null}
                   </div>
                   <p className="mt-2 text-sm leading-6 text-graphite/80">{stage.instruction}</p>
+                  {stage.key === "link-added" && stage.state === "current" ? (
+                    <div className="mt-4 flex flex-wrap items-center gap-3">
+                      {communicationLink ? (
+                        <a className="btn-secondary" href={communicationLink} target="_blank" rel="noreferrer">
+                          Открыть ссылку
+                        </a>
+                      ) : null}
+                      <button type="button" className="btn-primary" onClick={confirmSchedule} disabled={loading || !communicationLink}>
+                        {loading ? "Подтверждение..." : "Дата и время верные"}
+                      </button>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>
           );
         })}
       </div>
+      {error ? <p className="mt-4 text-sm text-[#8a453b]">{error}</p> : null}
     </div>
   );
 }

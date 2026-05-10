@@ -55,6 +55,7 @@ model User {
 
   graves Grave[]
   orders Order[]
+  orderMessages OrderMessage[]
 }
 
 model Grave {
@@ -99,7 +100,20 @@ model Order {
 
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   grave        Grave         @relation(fields: [graveId], references: [id], onDelete: Cascade)
+  messages     OrderMessage[]
   reportPhotos ReportPhoto[]
+}
+
+model OrderMessage {
+  id         String   @id @default(cuid())
+  orderId    String
+  authorId   String?
+  senderRole Role
+  body       String
+  createdAt  DateTime @default(now())
+
+  order   Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  author  User? @relation(fields: [authorId], references: [id], onDelete: SetNull)
 }
 
 model ReportPhoto {

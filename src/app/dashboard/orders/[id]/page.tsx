@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { OrderQuestionForm } from "@/components/order-question-form";
+import { OrderChat } from "@/components/order-chat";
 import { OrderStages } from "@/components/order-stages";
 import { StatusBadge } from "@/components/status-badge";
 import { requireUser } from "@/lib/auth";
@@ -15,7 +15,7 @@ export default async function OrderPage({ params }: PageProps) {
   const { id } = await params;
   const order = await prisma.order.findFirst({
     where: { id, userId: user.id },
-    include: { grave: true, reportPhotos: true },
+    include: { grave: true, reportPhotos: true, messages: { include: { author: { select: { name: true } } }, orderBy: { createdAt: "asc" } } },
   });
 
   if (!order) notFound();
@@ -52,6 +52,22 @@ export default async function OrderPage({ params }: PageProps) {
                 <dt className="text-graphite">Контакт</dt>
                 <dd className="font-medium text-ink">{order.contactValue}</dd>
               </div>
+              {order.serviceType === "LIVE_CALL" ? (
+                <div className="flex justify-between gap-4">
+                  <dt className="text-graphite">Ссылка для связи</dt>
+                  <dd className="font-medium text-ink">
+                    {order.communicationLink ? (
+                      <a className="text-moss underline-offset-4 hover:underline" href={order.communicationLink} target="_blank" rel="noreferrer">
+                        перейти
+                      </a>
+                    ) : order.status === "AWAITING_COMMUNICATION_LINK" ? (
+                      "пока готовится"
+                    ) : (
+                      "пока нет"
+                    )}
+                  </dd>
+                </div>
+              ) : null}
             </dl>
             <div className="mt-6 rounded-md bg-linen p-4">
               <p className="text-sm font-semibold text-ink">Комментарий пользователя</p>
@@ -63,11 +79,11 @@ export default async function OrderPage({ params }: PageProps) {
             </div>
           </div>
 
-          <OrderQuestionForm orderId={order.id} initialQuestion={order.customerQuestion} disabled={order.status === "CANCELED"} />
+          <OrderChat orderId={order.id} currentRole="user" messages={order.messages} disabled={order.status === "CANCELED"} />
         </div>
 
         <div className="space-y-6">
-          <OrderStages serviceType={order.serviceType} status={order.status} />
+          <OrderStages orderId={order.id} serviceType={order.serviceType} status={order.status} communicationLink={order.communicationLink} />
           <div className="card p-6">
             <h2 className="text-lg font-semibold text-ink">Место захоронения</h2>
             <img src={order.grave.photoUrl || "/sample-grave.svg"} alt="" className="mt-4 h-56 w-full rounded-md object-cover" />
