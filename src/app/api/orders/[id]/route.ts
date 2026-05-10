@@ -1,5 +1,6 @@
 import { requireUser } from "@/lib/auth";
 import { clean, jsonError, parseValidationError } from "@/lib/api";
+import { resolveDraftOrderStatus } from "@/lib/order-status";
 import { prisma } from "@/lib/prisma";
 import { orderSchema } from "@/lib/validators";
 
@@ -37,6 +38,7 @@ export async function PATCH(request: Request, { params }: Params) {
         contactMethod: data.contactMethod,
         contactValue: data.contactValue,
         preferredDateTime: new Date(data.preferredDateTime),
+        status: resolveDraftOrderStatus(data.serviceType, existing.status),
         userComment: clean(data.userComment),
       },
       include: { grave: true, reportPhotos: true },
