@@ -56,7 +56,7 @@ export function OrderChat({ orderId, currentRole, messages, disabled = false }: 
   }
 
   return (
-    <div className="card p-6">
+    <div className="card p-4 sm:p-6">
       <div>
         <h2 className="text-lg font-semibold text-ink">Чат по заявке</h2>
         <p className="mt-1 muted">
@@ -66,14 +66,14 @@ export function OrderChat({ orderId, currentRole, messages, disabled = false }: 
         </p>
       </div>
 
-      <div className="mt-5 max-h-[26rem] space-y-3 overflow-y-auto rounded-lg border border-stonewarm/70 bg-[#fbf8f1]/70 p-4">
+      <div className="mt-5 max-h-[60svh] space-y-3 overflow-y-auto rounded-lg border border-stonewarm/70 bg-[#fbf8f1]/70 p-3 sm:max-h-[26rem] sm:p-4">
         {messages.length ? (
           messages.map((chatMessage) => {
             const isOwn = chatMessage.senderRole === currentRole;
             return (
               <div key={chatMessage.id} className={`flex ${isOwn ? "justify-end" : "justify-start"}`}>
                 <div
-                  className={`max-w-[85%] rounded-2xl px-4 py-3 shadow-sm ${
+                  className={`max-w-[92%] rounded-2xl px-4 py-3 shadow-sm sm:max-w-[85%] ${
                     isOwn ? "bg-moss text-white" : "border border-stonewarm/70 bg-white text-ink"
                   }`}
                 >

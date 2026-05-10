@@ -4,10 +4,10 @@ import { AuthForm } from "@/components/auth-form";
 
 export default function LoginPage() {
   return (
-    <section className="container-page flex min-h-[70vh] items-center justify-center py-12">
+    <section className="container-page flex min-h-[70svh] items-center justify-center py-8 sm:py-12">
       <div className="w-full max-w-md">
         <p className="eyebrow text-center">Вход</p>
-        <h1 className="display-title mt-4 text-center text-5xl">Личный кабинет</h1>
+        <h1 className="display-title mt-4 text-center text-4xl sm:text-5xl">Личный кабинет</h1>
         <p className="mt-3 text-center muted">
           Тестовый пользователь: user@memorial.local / User12345
         </p>

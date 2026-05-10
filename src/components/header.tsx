@@ -7,14 +7,14 @@ export async function Header() {
   const user = await getCurrentUser();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/70 bg-[#fbf8f1]/80 backdrop-blur-2xl">
-      <div className="container-page flex min-h-[76px] items-center justify-between gap-4">
-        <Link href="/" className="group flex items-center gap-3 font-semibold text-ink">
+    <header className="sticky top-0 z-40 border-b border-white/70 bg-[#fbf8f1]/90 pt-[env(safe-area-inset-top)] backdrop-blur-2xl">
+      <div className="container-page flex min-h-[72px] items-center justify-between gap-3 sm:gap-4">
+        <Link href="/" className="group flex min-w-0 items-center gap-3 font-semibold text-ink">
           <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-ink text-white shadow-lift transition group-hover:bg-moss">
             <Leaf className="h-5 w-5" aria-hidden />
           </span>
-          <span className="leading-tight">
-            <span className="block text-base">Тихое посещение</span>
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate text-sm sm:text-base">Тихое посещение</span>
             <span className="hidden text-[11px] font-bold uppercase tracking-[0.2em] text-moss sm:block">
               Memorial Visit
             </span>
@@ -55,11 +55,11 @@ export async function Header() {
 
         <div className="flex items-center gap-3 md:hidden">
           {user ? (
-            <Link href="/dashboard" className="btn-secondary px-3">
+            <Link href="/dashboard" className="btn-secondary px-3 text-sm">
               Кабинет
             </Link>
           ) : (
-            <Link href="/login" className="btn-secondary px-3">
+            <Link href="/login" className="btn-secondary px-3 text-sm">
               Войти
             </Link>
           )}

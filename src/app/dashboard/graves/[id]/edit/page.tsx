@@ -12,9 +12,9 @@ export default async function EditGravePage({ params }: PageProps) {
   if (!grave) notFound();
 
   return (
-    <section className="container-page max-w-4xl py-10">
+    <section className="container-page max-w-4xl py-8 sm:py-10">
       <p className="eyebrow">Редактирование</p>
-      <h1 className="display-title mt-3 text-5xl">{grave.fullName}</h1>
+      <h1 className="display-title mt-3 text-4xl sm:text-5xl">{grave.fullName}</h1>
       <div className="mt-6">
         <GraveForm initial={grave} />
       </div>

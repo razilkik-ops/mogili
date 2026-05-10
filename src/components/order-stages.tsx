@@ -57,7 +57,7 @@ export function OrderStages({ orderId, serviceType, status, communicationLink }:
   }
 
   return (
-    <div className="card p-6">
+    <div className="card p-4 sm:p-6">
       <div className="flex items-center justify-between gap-3">
         <div>
           <h2 className="text-lg font-semibold text-ink">Этапы заявки</h2>
@@ -68,8 +68,8 @@ export function OrderStages({ orderId, serviceType, status, communicationLink }:
         {stages.map((stage, index) => {
           const styles = stageClass[stage.state];
           return (
-            <div key={stage.key} className={`rounded-lg border p-4 transition ${styles.wrapper}`}>
-              <div className="flex items-start gap-4">
+            <div key={stage.key} className={`rounded-lg border p-3 transition sm:p-4 ${styles.wrapper}`}>
+              <div className="flex items-start gap-3 sm:gap-4">
                 <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-sm font-semibold ${styles.marker}`}>
                   {index + 1}
                 </div>
@@ -81,7 +81,7 @@ export function OrderStages({ orderId, serviceType, status, communicationLink }:
                   </div>
                   <p className="mt-2 text-sm leading-6 text-graphite/80">{stage.instruction}</p>
                   {stage.key === "link-added" && stage.state === "current" ? (
-                    <div className="mt-4 flex flex-wrap items-center gap-3">
+                    <div className="mt-4 grid gap-3 sm:flex sm:flex-wrap sm:items-center">
                       {communicationLink ? (
                         <a className="btn-secondary" href={communicationLink} target="_blank" rel="noreferrer">
                           Открыть ссылку

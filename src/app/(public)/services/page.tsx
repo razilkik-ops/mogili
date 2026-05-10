@@ -7,18 +7,18 @@ const icons = [MapPinned, ClipboardCheck, Camera, Video, Sparkles];
 
 export default function ServicesPage() {
   return (
-    <section className="container-page py-12">
-      <div className="section-shell overflow-hidden p-6 sm:p-10">
+    <section className="container-page py-8 sm:py-12">
+      <div className="section-shell overflow-hidden p-4 sm:p-10">
         <div className="grid gap-8 lg:grid-cols-[1fr_0.7fr] lg:items-end">
           <div className="max-w-3xl">
             <p className="eyebrow">Услуги</p>
-            <h1 className="display-title mt-4 text-6xl sm:text-7xl">Онлайн-посещение, уход и отчёты</h1>
-            <p className="mt-6 text-lg leading-8 text-graphite/80">
+            <h1 className="display-title mt-4 text-4xl sm:text-7xl">Онлайн-посещение, уход и отчёты</h1>
+            <p className="mt-5 text-base leading-7 text-graphite/80 sm:mt-6 sm:text-lg sm:leading-8">
               Выберите услугу, формат отчёта и удобный способ связи. Подключение Zoom API и Telegram Bot API
               подготовлено как следующий этап интеграций.
             </p>
           </div>
-          <div className="rounded-lg bg-ink p-6 text-white shadow-lift">
+          <div className="rounded-lg bg-ink p-4 text-white shadow-lift sm:p-6">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#d8c3a5]">Форматы</p>
             <div className="mt-5 grid gap-3">
               {reportOptions.map((option) => (
@@ -39,7 +39,7 @@ export default function ServicesPage() {
             <Link
               key={service.serviceType}
               href={`/services/${service.slug}`}
-              className={`card interactive-card block p-6 ${index === 0 ? "lg:col-span-2" : ""}`}
+              className={`card interactive-card block p-4 sm:p-6 ${index === 0 ? "lg:col-span-2" : ""}`}
             >
               <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
                 <div>

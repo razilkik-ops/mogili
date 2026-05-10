@@ -15,9 +15,9 @@ export default async function AdminPage() {
   ]);
 
   return (
-    <section className="container-page py-10">
+    <section className="container-page py-8 sm:py-10">
       <p className="eyebrow">Админ-панель</p>
-      <h1 className="display-title mt-3 text-5xl">Управление сервисом</h1>
+      <h1 className="display-title mt-3 text-4xl sm:text-5xl">Управление сервисом</h1>
 
       <div className="mt-8 grid gap-4 md:grid-cols-3">
         <div className="card p-5">

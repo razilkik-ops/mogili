@@ -21,11 +21,11 @@ export default async function OrderPage({ params }: PageProps) {
   if (!order) notFound();
 
   return (
-    <section className="container-page py-10">
+    <section className="container-page py-8 sm:py-10">
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-        <div>
+        <div className="min-w-0">
           <p className="eyebrow">Заказ</p>
-          <h1 className="display-title mt-3 text-5xl">{serviceLabels[order.serviceType]}</h1>
+          <h1 className="display-title mt-3 text-4xl sm:text-5xl">{serviceLabels[order.serviceType]}</h1>
           <p className="mt-3 muted">{order.grave.fullName}</p>
         </div>
         <StatusBadge status={order.status} />
@@ -33,7 +33,7 @@ export default async function OrderPage({ params }: PageProps) {
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="space-y-6">
-          <div className="card p-6">
+          <div className="card p-4 sm:p-6">
             <h2 className="text-lg font-semibold text-ink">Детали</h2>
             <dl className="mt-5 space-y-3 text-sm">
               <div className="flex justify-between gap-4">
@@ -84,7 +84,7 @@ export default async function OrderPage({ params }: PageProps) {
 
         <div className="space-y-6">
           <OrderStages orderId={order.id} serviceType={order.serviceType} status={order.status} communicationLink={order.communicationLink} />
-          <div className="card p-6">
+          <div className="card p-4 sm:p-6">
             <h2 className="text-lg font-semibold text-ink">Место захоронения</h2>
             <img src={order.grave.photoUrl || "/sample-grave.svg"} alt="" className="mt-4 h-56 w-full rounded-md object-cover" />
             <p className="mt-4 font-semibold text-ink">{order.grave.fullName}</p>
@@ -104,7 +104,7 @@ export default async function OrderPage({ params }: PageProps) {
             ) : null}
           </div>
 
-          <div className="card p-6">
+          <div className="card p-4 sm:p-6">
             <h2 className="text-lg font-semibold text-ink">Отчёты и ссылки</h2>
             <div className="mt-4 space-y-2 text-sm text-graphite">
               <p>

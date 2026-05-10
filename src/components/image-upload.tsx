@@ -90,11 +90,11 @@ export function ImageUpload({ value, onChange, onRemove, label = "Загрузи
       {previewUrl ? (
         <div className="mt-3 overflow-hidden rounded-md border border-stonewarm bg-white/80">
           <img src={previewUrl} alt="Предпросмотр фотографии" className="h-48 w-full object-cover" />
-          <div className="flex items-center justify-between gap-3 border-t border-stonewarm/80 px-4 py-3">
+          <div className="flex flex-col gap-3 border-t border-stonewarm/80 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="text-xs font-semibold text-graphite/75">
               <span>{loading ? "Загружаем фотографию..." : "Фото готово к сохранению"}</span>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <span className="text-xs font-semibold text-graphite/75">{loading ? "Предпросмотр" : "Загружено"}</span>
               <button
                 type="button"

@@ -7,12 +7,19 @@
   background: #f6f1e8;
 }
 
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   min-height: 100vh;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at 8% 0%, rgba(184, 131, 104, 0.16), transparent 28rem),
     radial-gradient(circle at 92% 8%, rgba(49, 87, 68, 0.14), transparent 30rem),
@@ -25,35 +32,59 @@ a {
   text-decoration: none;
 }
 
+button,
+a,
 input,
 textarea,
 select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input,
+textarea,
+select {
+  min-height: 2.75rem;
+  font-size: 16px;
+  line-height: 1.5;
   @apply border-stonewarm/90 bg-white/90 text-ink shadow-sm outline-none transition focus:border-moss focus:ring-moss;
+}
+
+textarea {
+  resize: vertical;
+}
+
+img {
+  max-width: 100%;
 }
 
 @layer components {
   .container-page {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
   }
 
   .card {
     @apply rounded-lg border border-white/70 bg-white/75 shadow-quiet backdrop-blur-xl;
+    overflow-wrap: anywhere;
   }
 
   .panel {
     @apply rounded-lg border border-stonewarm/80 bg-[#fbf8f1]/90 shadow-quiet backdrop-blur-xl;
+    overflow-wrap: anywhere;
   }
 
   .section-shell {
     @apply rounded-lg border border-white/70 bg-white/45 shadow-quiet backdrop-blur-xl;
+    overflow-wrap: anywhere;
   }
 
   .btn-primary {
-    @apply inline-flex min-h-11 items-center justify-center rounded-md bg-ink px-5 py-2.5 text-sm font-semibold text-white shadow-lift transition duration-200 hover:-translate-y-0.5 hover:bg-moss focus:outline-none focus:ring-2 focus:ring-moss focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex min-h-11 min-w-0 items-center justify-center rounded-md bg-ink px-5 py-2.5 text-center text-sm font-semibold text-white shadow-lift transition duration-200 hover:-translate-y-0.5 hover:bg-moss focus:outline-none focus:ring-2 focus:ring-moss focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
   }
 
   .btn-secondary {
-    @apply inline-flex min-h-11 items-center justify-center rounded-md border border-stonewarm/90 bg-white/75 px-5 py-2.5 text-sm font-semibold text-ink shadow-sm backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:border-sage hover:bg-white focus:outline-none focus:ring-2 focus:ring-moss focus:ring-offset-2;
+    @apply inline-flex min-h-11 min-w-0 items-center justify-center rounded-md border border-stonewarm/90 bg-white/75 px-5 py-2.5 text-center text-sm font-semibold text-ink shadow-sm backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:border-sage hover:bg-white focus:outline-none focus:ring-2 focus:ring-moss focus:ring-offset-2;
   }
 
   .label {
@@ -73,10 +104,28 @@ select {
   }
 
   .display-title {
-    @apply font-display font-semibold leading-[0.95] tracking-normal text-ink;
+    @apply break-words font-display font-semibold leading-[0.98] tracking-normal text-ink;
   }
 
   .interactive-card {
     @apply transition duration-200 hover:-translate-y-1 hover:border-sage/70 hover:shadow-lift;
+  }
+}
+
+@media (max-width: 640px) {
+  .card,
+  .panel,
+  .section-shell {
+    box-shadow: 0 18px 45px rgba(23, 32, 29, 0.08);
+  }
+
+  .card dl > div {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .card dd {
+    overflow-wrap: anywhere;
+    text-align: left;
   }
 }

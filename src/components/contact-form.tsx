@@ -31,7 +31,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={submit} className="card space-y-5 p-6">
+    <form onSubmit={submit} className="card space-y-5 p-4 sm:p-6">
       <div>
         <label className="label" htmlFor="name">
           Имя

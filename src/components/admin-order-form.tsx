@@ -54,7 +54,7 @@ export function AdminOrderForm({ order }: AdminOrderFormProps) {
   }
 
   return (
-    <form onSubmit={submit} className="card grid gap-5 p-6 md:grid-cols-2">
+    <form onSubmit={submit} className="card grid gap-5 p-4 sm:p-6 md:grid-cols-2">
       <div>
         <label className="label" htmlFor="status">
           Статус

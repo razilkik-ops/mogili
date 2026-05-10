@@ -22,14 +22,14 @@ export default async function DashboardPage() {
   const history = orders.filter((order) => ["COMPLETED", "CANCELED"].includes(order.status));
 
   return (
-    <section className="container-page py-10">
-      <div className="section-shell flex flex-col justify-between gap-6 p-6 md:flex-row md:items-end lg:p-8">
-        <div>
+    <section className="container-page py-8 sm:py-10">
+      <div className="section-shell flex flex-col justify-between gap-6 p-4 sm:p-6 md:flex-row md:items-end lg:p-8">
+        <div className="min-w-0">
           <p className="eyebrow">Личный кабинет</p>
-          <h1 className="display-title mt-3 text-5xl sm:text-6xl">Здравствуйте, {user.name}</h1>
+          <h1 className="display-title mt-3 text-4xl sm:text-6xl">Здравствуйте, {user.name}</h1>
           <p className="mt-3 muted">Здесь хранятся места захоронений, заказы и отчёты исполнителей.</p>
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="grid gap-3 sm:flex sm:flex-wrap">
           <Link href="/dashboard/graves/new" className="btn-secondary gap-2">
             <Plus className="h-4 w-4" aria-hidden />
             Добавить могилу
@@ -68,7 +68,7 @@ export default async function DashboardPage() {
             {graves.map((grave) => (
               <article key={grave.id} className="card interactive-card overflow-hidden">
                 <img src={grave.photoUrl || "/sample-grave.svg"} alt="" className="h-44 w-full object-cover" />
-                <div className="p-5">
+                <div className="p-4 sm:p-5">
                   <h3 className="font-semibold text-ink">{grave.fullName}</h3>
                   <p className="mt-2 muted">
                     {grave.city}, {grave.cemetery}

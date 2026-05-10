@@ -21,9 +21,9 @@ export default async function NewOrderPage({ searchParams }: PageProps) {
   const graves = await prisma.grave.findMany({ where: { userId: user.id }, orderBy: { createdAt: "desc" } });
 
   return (
-    <section className="container-page max-w-4xl py-10">
+    <section className="container-page max-w-4xl py-8 sm:py-10">
       <p className="eyebrow">Создание заказа</p>
-      <h1 className="display-title mt-3 text-5xl">Выберите услугу и дату</h1>
+      <h1 className="display-title mt-3 text-4xl sm:text-5xl">Выберите услугу и дату</h1>
       <p className="mt-3 muted">Оплата, Zoom API и Telegram Bot API готовы к подключению на следующем этапе.</p>
       <div className="mt-6">
         {graves.length ? (

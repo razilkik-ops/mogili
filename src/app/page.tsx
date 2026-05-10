@@ -46,16 +46,16 @@ export default function HomePage() {
     <>
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-soft-grid bg-[size:42px_42px] opacity-55" />
-        <div className="container-page grid min-h-[calc(100vh-4.75rem)] items-center gap-10 py-10 lg:grid-cols-[0.95fr_1.05fr] lg:py-14">
+        <div className="container-page grid min-h-[calc(100svh-4.5rem)] items-center gap-8 py-8 sm:py-10 lg:grid-cols-[0.95fr_1.05fr] lg:py-14">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-3 rounded-full border border-stonewarm/80 bg-white/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-moss shadow-sm backdrop-blur-xl">
+            <div className="inline-flex max-w-full items-center gap-3 rounded-full border border-stonewarm/80 bg-white/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-moss shadow-sm backdrop-blur-xl">
               <span className="h-2 w-2 rounded-full bg-clay" />
               Memorial Visit
             </div>
-            <h1 className="display-title mt-7 max-w-4xl text-6xl sm:text-7xl lg:text-8xl">
+            <h1 className="display-title mt-7 max-w-4xl text-5xl sm:text-7xl lg:text-8xl">
             Тихое посещение
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-graphite/80">
+            <p className="mt-6 max-w-2xl text-base leading-7 text-graphite/80 sm:mt-7 sm:text-lg sm:leading-8">
             Сервис онлайн-посещения могил, ухода за местами захоронения и бережных фото- или
             видеоотчётов для тех, кто не может приехать лично.
             </p>
@@ -83,12 +83,12 @@ export default function HomePage() {
           </div>
 
           <div className="relative mx-auto w-full max-w-2xl">
-            <div className="panel relative overflow-hidden p-4">
+            <div className="panel relative overflow-hidden p-3 sm:p-4">
               <div className="absolute left-6 top-6 z-10 rounded-full bg-ink px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white">
                 live care
               </div>
               <img src="/sample-report-1.svg" alt="" className="aspect-[4/3] w-full rounded-lg object-cover" />
-              <div className="absolute bottom-8 left-8 right-8 rounded-lg border border-white/70 bg-white/90 p-5 shadow-lift backdrop-blur-xl">
+              <div className="absolute bottom-5 left-5 right-5 rounded-lg border border-white/70 bg-white/90 p-4 shadow-lift backdrop-blur-xl sm:bottom-8 sm:left-8 sm:right-8 sm:p-5">
                 <div className="flex items-start gap-4">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-mist text-moss">
                     <CalendarCheck className="h-5 w-5" aria-hidden />
@@ -114,8 +114,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="container-page section-shell p-5 sm:p-8">
+      <section className="py-12 sm:py-16">
+        <div className="container-page section-shell p-4 sm:p-8">
           <p className="eyebrow">Как это работает</p>
           <div className="mt-8 grid gap-4 md:grid-cols-4">
             {steps.map((step, index) => (
@@ -130,11 +130,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="container-page py-16">
+      <section className="container-page py-12 sm:py-16">
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
             <p className="eyebrow">Услуги</p>
-            <h2 className="display-title mt-3 text-5xl">Помощь на расстоянии</h2>
+            <h2 className="display-title mt-3 text-4xl sm:text-5xl">Помощь на расстоянии</h2>
           </div>
           <Link href="/services" className="btn-secondary gap-2">
             Все услуги
@@ -162,11 +162,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-ink py-16 text-white">
+      <section className="bg-ink py-12 text-white sm:py-16">
         <div className="container-page grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#d8c3a5]">Доверие</p>
-            <h2 className="mt-3 font-display text-5xl font-semibold leading-none">Спокойная организация без лишнего шума</h2>
+            <h2 className="mt-3 break-words font-display text-4xl font-semibold leading-tight sm:text-5xl sm:leading-none">Спокойная организация без лишнего шума</h2>
             <p className="mt-5 text-base leading-8 text-white/70">
               Сервис хранит адреса захоронений, заказы, статусы и отчёты в личном кабинете. Администратор
               видит полную картину и может аккуратно вести заказ до завершения.
@@ -184,7 +184,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="container-page grid gap-8 py-16 lg:grid-cols-[1fr_0.9fr]">
+      <section className="container-page grid gap-8 py-12 sm:py-16 lg:grid-cols-[1fr_0.9fr]">
         <div>
           <p className="eyebrow">FAQ</p>
           <div className="mt-6 space-y-4">
@@ -198,7 +198,7 @@ export default function HomePage() {
         </div>
         <div>
           <p className="eyebrow">Контакты</p>
-          <h2 className="display-title mt-3 text-5xl">Напишите нам</h2>
+          <h2 className="display-title mt-3 text-4xl sm:text-5xl">Напишите нам</h2>
           <p className="mt-4 muted">Ответим спокойно, уточним детали и подскажем, как оформить первое посещение.</p>
           <div className="mt-5 flex items-center gap-3 rounded-lg border border-stonewarm/80 bg-white/65 p-4 text-sm font-semibold text-ink">
             <MessageCircle className="h-5 w-5 text-moss" aria-hidden />

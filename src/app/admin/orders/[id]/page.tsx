@@ -26,11 +26,11 @@ export default async function AdminOrderPage({ params }: PageProps) {
   if (!order) notFound();
 
   return (
-    <section className="container-page py-10">
+    <section className="container-page py-8 sm:py-10">
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-        <div>
+        <div className="min-w-0">
           <p className="eyebrow">Админ-заказ</p>
-          <h1 className="display-title mt-3 text-5xl">{serviceLabels[order.serviceType]}</h1>
+          <h1 className="display-title mt-3 text-4xl sm:text-5xl">{serviceLabels[order.serviceType]}</h1>
           <p className="mt-3 muted">
             {order.user.name} - {order.grave.fullName}
           </p>
@@ -40,7 +40,7 @@ export default async function AdminOrderPage({ params }: PageProps) {
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="space-y-6">
-          <div className="card p-6">
+          <div className="card p-4 sm:p-6">
             <h2 className="text-lg font-semibold text-ink">Информация</h2>
             <dl className="mt-5 space-y-3 text-sm">
               <div className="flex justify-between gap-4">

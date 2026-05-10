@@ -33,17 +33,17 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   if (!service) notFound();
 
   return (
-    <section className="container-page py-12">
+    <section className="container-page py-8 sm:py-12">
       <Link href="/services" className="inline-flex items-center gap-2 text-sm font-semibold text-moss hover:text-ink">
         <ArrowLeft className="h-4 w-4" aria-hidden />
         Все услуги
       </Link>
 
       <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_0.42fr]">
-        <div className="section-shell p-6 sm:p-10">
+        <div className="section-shell p-4 sm:p-10">
           <p className="eyebrow">Подробно об услуге</p>
-          <h1 className="display-title mt-4 text-6xl sm:text-7xl">{service.title}</h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-graphite/80">{service.lead}</p>
+          <h1 className="display-title mt-4 text-4xl sm:text-7xl">{service.title}</h1>
+          <p className="mt-5 max-w-3xl text-base leading-7 text-graphite/80 sm:mt-6 sm:text-lg sm:leading-8">{service.lead}</p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link href={`/dashboard/orders/new?service=${service.serviceType}`} className="btn-primary gap-2">
@@ -56,7 +56,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        <aside className="card p-6">
+        <aside className="card p-4 sm:p-6">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-moss">Кратко</p>
           <div className="mt-5 space-y-4">
             <div className="rounded-md bg-mist p-4">
@@ -74,7 +74,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       </div>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[0.62fr_0.38fr]">
-        <section className="card p-6 sm:p-8">
+        <section className="card p-4 sm:p-8">
           <div className="flex items-center gap-3">
             <span className="flex h-11 w-11 items-center justify-center rounded-md bg-ink text-white">
               <ClipboardList className="h-5 w-5" aria-hidden />
@@ -98,7 +98,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </section>
 
         <div className="space-y-6">
-          <section className="card p-6">
+          <section className="card p-4 sm:p-6">
             <p className="eyebrow">Что входит</p>
             <div className="mt-5 space-y-3">
               {service.included.map((item) => (
@@ -110,7 +110,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section className="rounded-lg bg-ink p-6 text-white shadow-lift">
+          <section className="rounded-lg bg-ink p-4 text-white shadow-lift sm:p-6">
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#d8c3a5]">Результат</p>
             <p className="mt-4 text-lg font-semibold leading-7">{service.outcome}</p>
             <Link href={`/dashboard/orders/new?service=${service.serviceType}`} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#d8c3a5]">

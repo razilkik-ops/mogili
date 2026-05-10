@@ -34,7 +34,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
   }
 
   return (
-    <form onSubmit={submit} className="card space-y-5 p-6">
+    <form onSubmit={submit} className="card space-y-5 p-4 sm:p-6">
       {mode === "register" ? (
         <div>
           <label className="label" htmlFor="name">
